@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 
-                bat git branch:'main' ,url: 'https://github.com/anumsajid13/simple-reactjs-app.git'
+                 git branch:'main' ,url: 'https://github.com/anumsajid13/simple-reactjs-app.git'
             }
         }
         
