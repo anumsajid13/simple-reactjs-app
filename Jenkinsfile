@@ -5,35 +5,37 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout code from GitHub repository
-                git 'https://github.com/aditya-sridhar/simple-reactjs-app.git'
+                git 'https://github.com/anumsajid13/simple-reactjs-app.git'
             }
         }
         
         stage('Dependency Installation') {
             steps {
                 // Install dependencies for the frontend
-                sh 'npm install'
+                bat 'npm install'
             }
         }
         
         stage('Build Docker Image') {
             steps {
                 // Build Docker image
-                sh 'docker build -t your_dockerhub_username/simple-reactjs-app .'
+                bat 'docker build -t anumsajid/simple-reactjs-app .'
             }
         }
         
         stage('Run Docker Image') {
             steps {
                 // Run Docker image
-                sh 'docker run -d -p 8080:80 your_dockerhub_username/simple-reactjs-app'
+                bat 'docker run -d -p 8080:80 anumsajid/simple-reactjs-app'
             }
         }
         
         stage('Push Docker Image') {
             steps {
                 // Push Docker image to Docker Hub
-                sh 'docker push your_dockerhub_username/simple-reactjs-app'
+                withCredentials([usernamePassword(credentialsId: '8edf9ffe-fb4c-4b41-add0-63caa4007737')]) {
+                    bat 'docker push anumsajid/simple-reactjs-app'
+                }
             }
         }
     }
